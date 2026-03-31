@@ -114,6 +114,29 @@ schedule:
   days_back: 1  # How many days back to fetch
 ```
 
+## Automated Daily Digest (GitHub Actions)
+
+The repository includes a GitHub Actions workflow that runs the digest pipeline daily at 8 AM CT.
+
+To enable it:
+
+1. Push the repository to GitHub.
+
+2. Add the following secrets in **Settings → Secrets and variables → Actions**:
+
+   | Secret | Required | Description |
+   |--------|----------|-------------|
+   | `ANTHROPIC_API_KEY` | Yes | Your Anthropic API key |
+   | `SMTP_PASSWORD` | Yes | Gmail app password for sending the digest |
+   | `EMAIL_ADDRESS` | Yes | Your email address (used as sender and recipient) |
+   | `SEMANTIC_SCHOLAR_API_KEY` | No | For higher Semantic Scholar rate limits |
+
+3. The workflow uses `config.example.yaml` as a base and substitutes your email address at runtime. Edit `config.example.yaml` to customize sources, filtering, and other settings.
+
+4. The seen-paper database is cached between runs so you won't receive duplicate papers.
+
+You can also trigger a run manually from the **Actions** tab using the "Run workflow" button.
+
 ## Prompt Optimization (Autoresearch)
 
 The project includes an evaluation system for iteratively improving the scoring prompt.
@@ -137,6 +160,9 @@ The project includes an evaluation system for iteratively improving the scoring 
 ## Project Structure
 
 ```
+├── .github/
+│   └── workflows/
+│       └── daily-digest.yml  # GitHub Actions daily cron
 ├── src/
 │   ├── main.py              # Pipeline orchestration
 │   ├── config.py            # YAML + env config loading
