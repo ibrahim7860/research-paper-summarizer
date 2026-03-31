@@ -62,7 +62,7 @@
         <strong>New Doors</strong>
         <ul>
         {% for door in paper.new_doors %}
-          <li>{{ door }}</li>
+          <li><strong>{{ door.application }}</strong><br><em>Build:</em> {{ door.product_example }}</li>
         {% endfor %}
         </ul>
       </div>
@@ -99,7 +99,7 @@
         <strong>New Doors</strong>
         <ul>
         {% for door in paper.new_doors %}
-          <li>{{ door }}</li>
+          <li><strong>{{ door.application }}</strong><br><em>Build:</em> {{ door.product_example }}</li>
         {% endfor %}
         </ul>
       </div>

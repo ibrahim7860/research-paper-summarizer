@@ -24,7 +24,11 @@ Respond ONLY with valid JSON (no markdown, no explanation):
   "summary": "<2-3 sentences: what is new, why it matters, what could be built with it>",
   "key_takeaway": "<1 sentence: what this enables that was not previously possible or practical>",
   "novelty": "<2-3 sentences: how this differs from prior work, what gap it fills, why existing approaches fall short>",
-  "new_doors": ["<concrete application or product this enables>", "<another new capability unlocked>", "<third new possibility>"]
+  "new_doors": [
+    {"application": "<capability or application this enables>", "product_example": "<specific, buildable product that directly uses this application>"},
+    {"application": "<another new capability unlocked>", "product_example": "<specific product using this capability>"},
+    {"application": "<third new possibility>", "product_example": "<specific product using this possibility>"}
+  ]
 }
 
 ## Paper to Evaluate
