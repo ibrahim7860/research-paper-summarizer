@@ -1,0 +1,11 @@
+config.yaml
+.env
+*.pyc
+__pycache__/
+.venv/
+*.egg-info/
+dist/
+eval/results.tsv
+eval/test_set.json
+~/.paper-digest/
+.context/

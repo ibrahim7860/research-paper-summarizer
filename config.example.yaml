@@ -1,0 +1,39 @@
+sources:
+  arxiv:
+    enabled: true
+    categories:
+      - "cs.AI"
+      - "cs.LG"
+      - "cs.CL"
+      - "cs.SE"
+      - "cs.MA"
+    max_results_per_category: 30
+
+  semantic_scholar:
+    enabled: true
+    keywords:
+      - "AI agents"
+      - "LLM applications"
+      - "code generation"
+      - "RAG retrieval augmented generation"
+
+  papers_with_code:
+    enabled: true
+
+filtering:
+  relevance_threshold: 7
+  max_papers_per_digest: 20
+
+email:
+  smtp_host: smtp.gmail.com
+  smtp_port: 587
+  sender: your-email@gmail.com
+  recipients:
+    - your-email@gmail.com
+  subject_prefix: "[Paper Digest]"
+
+storage:
+  db_path: "~/.paper-digest/papers.db"
+
+schedule:
+  days_back: 1
