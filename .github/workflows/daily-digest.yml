@@ -1,0 +1,37 @@
+name: Daily Paper Digest
+
+on:
+  schedule:
+    - cron: '0 13 * * *' # 8 AM CT (CDT=UTC-5; will be 7 AM during CST)
+  workflow_dispatch: {} # Manual trigger for testing
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Restore paper database cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.paper-digest/
+          key: paper-db-${{ github.run_id }}
+          restore-keys: paper-db-
+
+      - name: Generate config
+        run: |
+          cp config.example.yaml config.yaml
+          sed -i 's/your-email@gmail.com/${{ secrets.EMAIL_ADDRESS }}/g' config.yaml
+
+      - name: Run paper digest
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
+        run: uv run paper-digest
