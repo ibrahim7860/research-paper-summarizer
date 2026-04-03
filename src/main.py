@@ -93,6 +93,7 @@ def main() -> None:
                     summary=result.get("summary", ""),
                     relevance_score=result.get("relevance_score", 0),
                     key_takeaway=result.get("key_takeaway", ""),
+                    one_liner=result.get("one_liner", ""),
                 )
             else:
                 storage.mark_seen(

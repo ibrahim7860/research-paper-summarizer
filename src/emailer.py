@@ -22,6 +22,7 @@ def _prepare_paper_data(paper: Paper, result: dict) -> dict:
         "url": paper.url,
         "authors": paper.authors[:5],  # limit for readability
         "source": paper.source,
+        "one_liner": result.get("one_liner", result.get("key_takeaway", "")),
         "summary": result.get("summary", ""),
         "key_takeaway": result.get("key_takeaway", ""),
         "novelty": result.get("novelty", ""),

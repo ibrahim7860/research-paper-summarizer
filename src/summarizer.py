@@ -19,7 +19,7 @@ def load_prompt_template() -> str:
 
 
 def score_paper(client: anthropic.Anthropic, paper: Paper, model: str = "claude-haiku-4-5-20251001") -> dict | None:
-    """Score and summarize a single paper. Returns dict with relevance_score, summary, key_takeaway."""
+    """Score and summarize a single paper. Returns dict with relevance_score, one_liner, summary, key_takeaway."""
     template = load_prompt_template()
     prompt = template.replace("{title}", paper.title).replace("{abstract}", paper.abstract)
 

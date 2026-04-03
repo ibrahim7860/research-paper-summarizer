@@ -22,11 +22,18 @@ class PaperStorage:
                 summary TEXT,
                 relevance_score REAL,
                 key_takeaway TEXT,
+                one_liner TEXT DEFAULT '',
                 fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE(normalized_title)
             )
         """)
         self.conn.commit()
+        # Migrate existing databases that don't have the one_liner column
+        try:
+            self.conn.execute("ALTER TABLE papers ADD COLUMN one_liner TEXT DEFAULT ''")
+            self.conn.commit()
+        except sqlite3.OperationalError:
+            pass
 
     def is_seen(self, normalized_title: str) -> bool:
         row = self.conn.execute(
@@ -43,12 +50,13 @@ class PaperStorage:
         summary: str = "",
         relevance_score: float = 0.0,
         key_takeaway: str = "",
+        one_liner: str = "",
     ) -> None:
         self.conn.execute(
             """INSERT OR IGNORE INTO papers
-               (external_id, normalized_title, title, source, summary, relevance_score, key_takeaway, fetched_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-            (external_id, normalized_title, title, source, summary, relevance_score, key_takeaway, datetime.utcnow()),
+               (external_id, normalized_title, title, source, summary, relevance_score, key_takeaway, one_liner, fetched_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (external_id, normalized_title, title, source, summary, relevance_score, key_takeaway, one_liner, datetime.utcnow()),
         )
         self.conn.commit()
 

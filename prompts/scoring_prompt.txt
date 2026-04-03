@@ -20,6 +20,7 @@ LOW SCORE (1-4): Paper is purely theoretical, focuses only on benchmarks without
 ## Output Format
 Respond ONLY with valid JSON (no markdown, no explanation):
 {
+  "one_liner": "<max 15 words: a punchy, scroll-stopping line about what this paper enables — lead with impact, not method. Examples: 'Agents that debug themselves by replaying their own traces', 'Fine-tune any LLM on your laptop in 20 minutes flat', 'RAG that actually knows when it doesn't know'>",
   "relevance_score": <integer 1-10>,
   "summary": "<2-3 sentences: what is new, why it matters, what could be built with it>",
   "key_takeaway": "<1 sentence: what this enables that was not previously possible or practical>",
