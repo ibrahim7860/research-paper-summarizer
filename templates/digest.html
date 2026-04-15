@@ -21,6 +21,14 @@
   .score-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
   .score-high { background: #d4edda; color: #155724; }
   .score-mid { background: #fff3cd; color: #856404; }
+  .paper-summary { font-size: 14px; line-height: 1.6; color: #333; margin: 8px 0; }
+  .paper-takeaway { font-size: 13px; color: #2d6a4f; background: #f0faf4; padding: 8px 12px; border-radius: 4px; border-left: 3px solid #2d6a4f; margin: 8px 0; }
+  .paper-novelty { font-size: 13px; color: #1a3a5c; background: #eef4fb; padding: 8px 12px; border-radius: 4px; border-left: 3px solid #3a7bd5; margin: 8px 0; }
+  .paper-novelty strong { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; color: #2a5a9c; }
+  .paper-doors { font-size: 13px; color: #5a3a1a; background: #fdf6ee; padding: 8px 12px; border-radius: 4px; border-left: 3px solid #d4a03c; margin: 8px 0; }
+  .paper-doors strong { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; color: #8a6a2a; }
+  .paper-doors ul { margin: 4px 0 0; padding-left: 18px; }
+  .paper-doors li { margin-bottom: 3px; }
   .footer { padding: 20px 32px; font-size: 12px; color: #999; text-align: center; border-top: 1px solid #eee; }
 </style>
 </head>
@@ -43,6 +51,24 @@
         {% if paper.pdf_url %}&middot; <a href="{{ paper.pdf_url }}">PDF</a>{% endif %}
         {% if paper.code_url %}&middot; <a href="{{ paper.code_url }}">Code</a>{% endif %}
       </div>
+      <div class="paper-summary">{{ paper.summary }}</div>
+      <div class="paper-takeaway">{{ paper.key_takeaway }}</div>
+      {% if paper.novelty %}
+      <div class="paper-novelty">
+        <strong>What's Novel</strong>
+        {{ paper.novelty }}
+      </div>
+      {% endif %}
+      {% if paper.new_doors %}
+      <div class="paper-doors">
+        <strong>New Doors</strong>
+        <ul>
+        {% for door in paper.new_doors %}
+          <li><strong>{{ door.application }}</strong><br><em>Build:</em> {{ door.product_example }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
     </div>
     {% endfor %}
   </div>
@@ -60,6 +86,24 @@
         {% if paper.pdf_url %}&middot; <a href="{{ paper.pdf_url }}">PDF</a>{% endif %}
         {% if paper.code_url %}&middot; <a href="{{ paper.code_url }}">Code</a>{% endif %}
       </div>
+      <div class="paper-summary">{{ paper.summary }}</div>
+      <div class="paper-takeaway">{{ paper.key_takeaway }}</div>
+      {% if paper.novelty %}
+      <div class="paper-novelty">
+        <strong>What's Novel</strong>
+        {{ paper.novelty }}
+      </div>
+      {% endif %}
+      {% if paper.new_doors %}
+      <div class="paper-doors">
+        <strong>New Doors</strong>
+        <ul>
+        {% for door in paper.new_doors %}
+          <li><strong>{{ door.application }}</strong><br><em>Build:</em> {{ door.product_example }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
     </div>
     {% endfor %}
   </div>
